@@ -1,5 +1,5 @@
 import streamlit as st
-#from reportlab.pdfgen import canvas
+from reportlab.pdfgen import canvas
 import datetime
 import requests
 
@@ -158,7 +158,7 @@ def diagnose_issues(data):
 
     return affected_parts, advisories
 
-#import joblib
+import joblib
 import pandas as pd
 
 # Load Model
