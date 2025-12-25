@@ -158,7 +158,7 @@ def diagnose_issues(data):
 
     return affected_parts, advisories
 
-import joblib
+#import joblib
 import pandas as pd
 
 # Load Model
