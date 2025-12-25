@@ -27,12 +27,14 @@
 
 4. Install required dependencies:
    ```bash
-   pip install -r requirements.txt
+   python -m pip install streamlit numpy pandas reportlab
+
    ```
 
 5. Run the project:
    ```bash
-   python main.py
+   python virtual_esp32.py
+   streamlit run app.py
    ```
 
 ### Output
