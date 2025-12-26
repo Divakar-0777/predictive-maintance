@@ -3,4 +3,4 @@ numpy
 pandas
 reportlab
 joblib
-sklearn
+scikit-learn
