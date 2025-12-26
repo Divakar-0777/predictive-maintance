@@ -251,6 +251,23 @@ for advice in advisories:
 # -------------------------------------------------
 # PDF REPORT GENERATION
 # -------------------------------------------------
+if model:
+    probs = model.predict_proba(input_data)[0]
+    classes = model.classes_
+
+    prob_dict = {cls: round(prob * 100, 1) for cls, prob in zip(classes, probs)}
+    vehicle_status = model.predict(input_data)[0]
+
+    # ✅ ADD THIS
+    vehicle_score = int(
+        prob_dict.get("Healthy", 0) * 1.0 +
+        prob_dict.get("Warning", 0) * 0.6 +
+        prob_dict.get("Critical", 0) * 0.2
+    )
+else:
+    vehicle_status = "Unknown"
+    prob_dict = {}
+    vehicle_score = 0
 def generate_pdf(affected_parts, advisories, prob_dict):
     file_name = "vehicle_health_report.pdf"
     c = canvas.Canvas(file_name, pagesize=(595, 842))  # A4 size
