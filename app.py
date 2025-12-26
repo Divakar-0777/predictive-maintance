@@ -1,7 +1,6 @@
 import streamlit as st
 from reportlab.pdfgen import canvas
 import datetime
-import requests
 
 # -------------------------------------------------
 # PAGE CONFIG
