@@ -258,7 +258,7 @@ if model:
     prob_dict = {cls: round(prob * 100, 1) for cls, prob in zip(classes, probs)}
     vehicle_status = model.predict(input_data)[0]
 
-    # ✅ ADD THIS
+    # ADD THIS
     vehicle_score = int(
         prob_dict.get("Healthy", 0) * 1.0 +
         prob_dict.get("Warning", 0) * 0.6 +
