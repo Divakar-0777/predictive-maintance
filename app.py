@@ -51,34 +51,11 @@ use_sensor = st.checkbox("Use Live Sensor Data (ESP32 Simulation)")
 # -------------------------------------------------
 col1, col2 = st.columns(2)
 
-if use_sensor:
-    try:
-        sensor_data = requests.get("http://localhost:5000/sensor").json()
-        st.success("Live sensor data connected")
-
-        rpm = sensor_data["engine_rpm"]
-        oil_pressure = sensor_data["lub_oil_pressure"]
-        fuel_pressure = sensor_data["fuel_pressure"]
-        coolant_pressure = sensor_data["coolant_pressure"]
-        oil_temp = sensor_data["lub_oil_temp"]
-        coolant_temp = sensor_data["coolant_temp"]
-        battery_voltage = sensor_data["battery_voltage"]
-
-        # Display values (read-only)
-        with col1:
-            st.metric("Engine RPM", rpm)
-            st.metric("Lub Oil Pressure (bar)", oil_pressure)
-            st.metric("Fuel Pressure (bar)", fuel_pressure)
-            st.metric("Coolant Pressure (bar)", coolant_pressure)
-
-        with col2:
-            st.metric("Lub Oil Temperature (°C)", oil_temp)
-            st.metric("Coolant Temperature (°C)", coolant_temp)
-            st.metric("Battery Voltage (V)", battery_voltage)
-
-    except Exception:
-        st.error("Sensor not available. Switching to manual input.")
-        use_sensor = False
+try:
+    from virtual_esp32 import get_sensor_data
+    SENSOR_AVAILABLE = True
+except ImportError:
+    SENSOR_AVAILABLE = False
 
 if not use_sensor:
     with col1:
